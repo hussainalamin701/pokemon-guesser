@@ -1,6 +1,6 @@
-import Header from '../components/Header';
-import PokemonDisplay from '@/components/PokemonDisplay';
-import GuessInput from '@/components/GuessInput';
+import Header from '../components/layout/Header';
+import PokemonDisplay from '@/components/game/PokemonDisplay';
+import GuessInput from '@/components/game/GuessInput';
 
 export default function Home() {
   return (
