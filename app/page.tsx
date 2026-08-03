@@ -1,14 +1,11 @@
 import Header from '../components/layout/Header';
-import PokemonDisplay from '@/components/game/PokemonDisplay';
-import GuessInput from '@/components/game/GuessInput';
+import Game from '@/components/game/Game';
 
 export default function Home() {
   return (
     <div>
       <Header />
-      
-      <PokemonDisplay pokemon='charmander'/>
-      <GuessInput />
+      <Game />
 
     </div>
   );

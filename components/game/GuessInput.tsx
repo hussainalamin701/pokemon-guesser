@@ -1,21 +1,26 @@
 "use client"
 import { useState } from "react";
+import { SetStateAction, Dispatch } from "react";
 
-function handleGuess(){
+type GuessInputProps = {
+    guess: string,
+    setGuess: (value: string) => void;
+};
 
-}
+export default function GuessInput({guess,setGuess}: GuessInputProps){
+    const handleGuess = () =>{
+        console.log(guess);
+    }
 
-export default function GuessInput(){
-    const [guess, setPokemon] = useState("");
     return(
         <div>
             <input 
                 type="text"
                 placeholder="Enter guess here"
                 value={guess}
-                onChange={(event) => setPokemon(event.target.value)} />
+                onChange={(event) => setGuess(event.target.value)} />
             
-            <button onClick={() => console.log(guess)}>Guess</button>
+            <button onClick={handleGuess}>Guess</button>
 
         </div>
     )
