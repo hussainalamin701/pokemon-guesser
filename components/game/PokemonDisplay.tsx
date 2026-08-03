@@ -17,11 +17,8 @@ export default function PokemonDisplay({pokemon}: PokemonDisplayProps) {
                 alt={pokemon.name}
                 width={250}
                 height={250}
+                className="brightness-0"
             />
-
-            <p className="mt-4 text-xl">
-                {pokemon.name}
-            </p>
 
         </div>
     );
