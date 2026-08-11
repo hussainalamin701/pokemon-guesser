@@ -16,7 +16,7 @@ export default function PokemonDisplay({pokemon, revealed}: PokemonDisplayProps)
                         p-6
                         shadow-inner
                         mb-6">
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold mb-4 text-black">
                 Who's that Pokémon?
             </h2>
 

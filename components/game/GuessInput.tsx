@@ -8,11 +8,22 @@ type GuessInputProps = {
     handleGuess: () => void;
 };
 
+
+
 export default function GuessInput({
         guess,
         setGuess,
         handleGuess,
     }: GuessInputProps){
+
+    const handleKeyDown = (
+        event: React.KeyboardEvent<HTMLInputElement>,
+            
+        ) => {
+            if(event.key === "Enter"){
+                handleGuess();
+        }
+    }
 
     return(
         <div className="flex items-center justify-center flex-col p-2 flex gap-3 mt-6">
@@ -20,7 +31,8 @@ export default function GuessInput({
                 type="text"
                 placeholder="Enter guess here"
                 value={guess}
-                onChange={(event) => setGuess(event.target.value)} 
+                onChange={(event) => setGuess(event.target.value)}
+                onKeyDown={handleKeyDown} 
                 className="flex-1
                             rounded-xl border-2 border-blue-300 px-4 py-3
                             text-lg focus:outline-none focus:ring-4

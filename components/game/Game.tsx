@@ -2,23 +2,29 @@
 
 import type { Pokemon } from "./types/pokemon";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import PokemonDisplay from "./PokemonDisplay";
 import GuessInput from "./GuessInput";
 
 export default function Game() {
     // State
+
     const [guess, setGuess] = useState("");
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
     const [score, setScore] = useState(0);
     const [guessesRemaining, setGuessesRemaining] = useState(3);
+
     const [feedback, setFeedback] = useState("");
     const [revealed, setRevealed] = useState(false);
 
     // Variables
 
     // Functions
+    const resetGame = () => {
+        
+    }
+
     const fetchPokemon = async () => {
         setRevealed(false);
         const randomId = Math.floor(Math.random() * 151)+ 1;
@@ -39,7 +45,31 @@ export default function Game() {
         fetchPokemon();
     }, []);
 
+    const correctGuess = () =>{
+        setFeedback("Correct");
+        setRevealed(true);
+        setScore((previousScore) => previousScore + 100);
+        setGuess("");
+
+        setTimeout(() => {
+
+            fetchPokemon();
+        
+        }, 1100);
+    }
+
+    const incorrectGuess = () =>{
+        if(guessesRemaining === 0){
+            return;
+        }
+
+        setGuessesRemaining((previousGuess) => previousGuess -1);
+        setFeedback("Incorrect");
+        setGuess("");
+    }
+
     const handleGuess = () =>{
+
         if (guess.trim() === "") {
             setFeedback("Please enter a pokemon name.");
             return;
@@ -49,26 +79,10 @@ export default function Game() {
         const correctAnswer = pokemon?.name.trim().toLowerCase();
 
         if(userGuess === correctAnswer){
-            setFeedback("correct");
-            setRevealed(true);
-            setScore((previousScore) => previousScore + 100);
-            setGuess("");
-
-            setTimeout(() => {
-
-                fetchPokemon();
-            
-            }, 1100);
+            correctGuess();
 
         } else{
-            if(guessesRemaining === 0){
-                return;
-            }
-            setGuessesRemaining((previousGuess) => previousGuess -1);
-
-            setFeedback("incorrect");
-
-            setGuess("");
+            incorrectGuess();
         }
     }
     
@@ -76,7 +90,6 @@ export default function Game() {
     if(pokemon === null) {
         return <p>Loading... </p>
     }
-
     // UI
     return (
         <div className="
@@ -92,7 +105,7 @@ export default function Game() {
             transition-all
             duration-300">
 
-                <div className="flex justify-between mb-6 text-xl font-bold bg-red-600 p-2.5 rounded-lg">
+                <div className="flex justify-between mb-6 text-xl font-extrabold bg-red-600 p-2.5 rounded-lg">
                     <p>Score: {score}</p>
                     <p>Guesses: {guessesRemaining}</p>
                 </div>
@@ -106,7 +119,7 @@ export default function Game() {
                     handleGuess={ handleGuess }
                 />
 
-                <p className="text-center mt-6 font-semibold">
+                <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">
                     {feedback}
                 </p>
 
