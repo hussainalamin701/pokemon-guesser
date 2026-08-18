@@ -16,7 +16,7 @@ export default function Game() {
     const [score, setScore] = useState(0);
 
     const [guessesRemaining, setGuessesRemaining] = useState(3);
-    let hearts = Array(guessesRemaining).fill("❤️")
+    const hearts = Array(guessesRemaining).fill("❤️")
   
     const [feedback, setFeedback] = useState("");
     const [revealed, setRevealed] = useState(false);
@@ -27,7 +27,16 @@ export default function Game() {
 
     // Functions
     const resetGame = () => {
-        
+        setGameOver(false);
+
+        setGuess("");
+        setFeedback("");
+        setRevealed(false);
+
+        setGuessesRemaining(3);
+        setScore(0);
+
+        fetchPokemon();
     }
 
     const fetchPokemon = async () => {
@@ -64,12 +73,13 @@ export default function Game() {
     }
 
     const incorrectGuess = () =>{
-        setGuessesRemaining((previousGuess) => previousGuess -1);
-
-        if(guessesRemaining === 0){
-
-            resetGame();
+        const newGuessesRemaining = guessesRemaining - 1;
+        setGuessesRemaining(newGuessesRemaining);
+        
+        if(newGuessesRemaining === 0){
+            setGameOver(true);
         }
+      
         setFeedback("Incorrect");
         setGuess("");
     }
@@ -113,7 +123,7 @@ export default function Game() {
 
                 <div className="flex justify-between mb-6 text-xl font-extrabold p-2.5 rounded-lg">
                     <p>Score: {score}</p>
-                    <p>Guesses: {hearts}</p>
+                    <p>Guesses : {hearts.join("")}</p>
                 </div>
 
                 <PokemonDisplay 
@@ -121,17 +131,17 @@ export default function Game() {
                                 revealed = {revealed}/>
                 
                 {gameOver ? (
-                    <GameOver
-                        score = {score}
-                        resetGame={resetGame}
-                    />
-                ) : (
-                    <GuessInput 
-                        guess = { guess }
-                        setGuess={ setGuess }
-                        handleGuess={ handleGuess }
-                    /> 
-                )}
+                        <GameOver
+                            score={score}
+                            restartGame={resetGame}
+                        />
+                    ) : (
+                        <GuessInput
+                            guess={guess}
+                            setGuess={setGuess}
+                            handleGuess={handleGuess}
+                        />
+                    )}
 
 
                 <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">
