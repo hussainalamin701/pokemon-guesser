@@ -5,6 +5,7 @@ import type { Pokemon } from "./types/pokemon";
 import { useState, useEffect, KeyboardEvent } from "react";
 import PokemonDisplay from "./PokemonDisplay";
 import GuessInput from "./GuessInput";
+import GameOver from "./GameOver";
 
 export default function Game() {
     // State
@@ -13,10 +14,14 @@ export default function Game() {
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
     const [score, setScore] = useState(0);
-    const [guessesRemaining, setGuessesRemaining] = useState(3);
 
+    const [guessesRemaining, setGuessesRemaining] = useState(3);
+    let hearts = Array(guessesRemaining).fill("❤️")
+  
     const [feedback, setFeedback] = useState("");
     const [revealed, setRevealed] = useState(false);
+
+    const [gameOver, setGameOver] = useState(false);
 
     // Variables
 
@@ -59,11 +64,12 @@ export default function Game() {
     }
 
     const incorrectGuess = () =>{
-        if(guessesRemaining === 0){
-            return;
-        }
-
         setGuessesRemaining((previousGuess) => previousGuess -1);
+
+        if(guessesRemaining === 0){
+
+            resetGame();
+        }
         setFeedback("Incorrect");
         setGuess("");
     }
@@ -105,19 +111,28 @@ export default function Game() {
             transition-all
             duration-300">
 
-                <div className="flex justify-between mb-6 text-xl font-extrabold bg-red-600 p-2.5 rounded-lg">
+                <div className="flex justify-between mb-6 text-xl font-extrabold p-2.5 rounded-lg">
                     <p>Score: {score}</p>
-                    <p>Guesses: {guessesRemaining}</p>
+                    <p>Guesses: {hearts}</p>
                 </div>
 
                 <PokemonDisplay 
                                 pokemon = {pokemon}
                                 revealed = {revealed}/>
-                <GuessInput 
-                    guess = { guess }
-                    setGuess={ setGuess }
-                    handleGuess={ handleGuess }
-                />
+                
+                {gameOver ? (
+                    <GameOver
+                        score = {score}
+                        resetGame={resetGame}
+                    />
+                ) : (
+                    <GuessInput 
+                        guess = { guess }
+                        setGuess={ setGuess }
+                        handleGuess={ handleGuess }
+                    /> 
+                )}
+
 
                 <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">
                     {feedback}
