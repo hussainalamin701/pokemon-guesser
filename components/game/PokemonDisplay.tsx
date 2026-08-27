@@ -26,6 +26,7 @@ export default function PokemonDisplay({pokemon, revealed}: PokemonDisplayProps)
                 width={250}
                 height={250}
                 className={`
+                    animate-bounce-fade-in
                     transition-all
                     duration-200
                     drop-shadow-xl

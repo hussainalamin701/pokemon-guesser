@@ -11,6 +11,7 @@ export default function Game() {
     // State
 
     const [guess, setGuess] = useState("");
+    const [guessEvent, setGuessEvent] = useState(false);
 
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
@@ -87,7 +88,12 @@ export default function Game() {
         }
       
         setFeedback("Incorrect");
+        setGuessEvent(true);
         setGuess("");
+
+        setTimeout (() => {
+            setGuessEvent(false);
+        }, 450);
     }
 
     const handleGuess = () =>{
@@ -146,6 +152,7 @@ export default function Game() {
                             guess={guess}
                             setGuess={setGuess}
                             handleGuess={handleGuess}
+                            guessEvent = {guessEvent}
                         />
                     )}
 

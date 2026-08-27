@@ -1,11 +1,19 @@
 "use client"
+
 import { useState } from "react";
 import { SetStateAction, Dispatch } from "react";
+
+import Game from "./Game";
+
+type GameProps = {
+
+}
 
 type GuessInputProps = {
     guess: string;
     setGuess: Dispatch<SetStateAction<string>>;
     handleGuess: () => void;
+    guessEvent: boolean
 };
 
 
@@ -14,6 +22,7 @@ export default function GuessInput({
         guess,
         setGuess,
         handleGuess,
+        guessEvent,
     }: GuessInputProps){
 
     const handleKeyDown = (
@@ -33,18 +42,21 @@ export default function GuessInput({
                 value={guess}
                 onChange={(event) => setGuess(event.target.value)}
                 onKeyDown={handleKeyDown} 
-                className="flex-1
+                className={`flex-1
                             rounded-xl border-2 border-blue-300 px-4 py-3
                             text-lg focus:outline-none focus:ring-4
-                            focus:ring-blue-300 transition-all m-5 text-black"
+                            focus:ring-blue-300 transition-all m-5 text-black 
+                            ${guessEvent ? "animate-shake" : ""}`}
                             />
+            
             <button onClick={handleGuess} 
-                    className="bg-red-500 hover:bg-gray-400 p-2.5 text-white 
+                    className={`bg-red-500 hover:bg-gray-400 p-2.5 text-white 
                                 font-bold py-2 px-4 border-b-4 border-red-700 
                                 hover:border-red-500 rounded rounded-xl
                                 bg-blue-500 text-white font-bold
                                 px-6 py-3 hover:bg-blue-600 active:scale-95
-                                transition-all duration-200 shadow-lg">
+                                transition-all duration-200 shadow-lg
+                                ${guessEvent ? "animate-shake" : ""}`}>
                                 Guess
             </button>
 
