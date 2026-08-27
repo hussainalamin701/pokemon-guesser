@@ -20,12 +20,18 @@ export default function PokemonDisplay({pokemon, revealed}: PokemonDisplayProps)
                 Who's that Pokémon?
             </h2>
 
-            <Image 
+            <Image
                 src={pokemon.sprites.front_default}
                 alt={pokemon.name}
                 width={250}
                 height={250}
-                className={revealed? "" : "brightness-0"}
+                className={`
+                    transition-all
+                    duration-200
+                    drop-shadow-xl
+                    ${revealed ? "brightness-100" 
+                                : "brightness-0 scale-95"}
+                `}
             />
 
         </div>

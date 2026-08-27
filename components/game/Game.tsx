@@ -11,6 +11,7 @@ export default function Game() {
     // State
 
     const [guess, setGuess] = useState("");
+
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
     const [score, setScore] = useState(0);
@@ -40,8 +41,9 @@ export default function Game() {
     }
 
     const fetchPokemon = async () => {
+        try{
         setRevealed(false);
-        const randomId = Math.floor(Math.random() * 151)+ 1;
+        const randomId = Math.floor(Math.random() * 251)+ 1;
 
         const response = await fetch(
             `https://pokeapi.co/api/v2/pokemon/${randomId}`
@@ -53,6 +55,10 @@ export default function Game() {
         console.log(data.sprites.front_default);
 
         setPokemon(data);
+        }
+        catch (error){
+
+        }
     }
 
     useEffect(() => {
