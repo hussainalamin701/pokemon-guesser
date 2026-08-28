@@ -29,6 +29,8 @@ export default function Game() {
 
     // Variables
 
+    let currentStreak = 0;
+
     const borderColors = {
         default: "border-yellow-400",
         green: "border-green-400",
@@ -47,6 +49,7 @@ export default function Game() {
         setAnswerColor("default");
 
         setGuessesRemaining(3);
+        setScoreStreak(1);
         setScore(0);
 
         fetchPokemon();
@@ -54,11 +57,11 @@ export default function Game() {
 
     const fetchPokemon = async () => {
         try{
-        setRevealed(false);
-        const randomId = Math.floor(Math.random() * 251)+ 1;
+            setRevealed(false);
+            const randomId = Math.floor(Math.random() * 251)+ 1;
 
-        const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${randomId}`
+            const response = await fetch(
+                `https://pokeapi.co/api/v2/pokemon/${randomId}`
         );
 
         const data = await response.json();
@@ -77,11 +80,17 @@ export default function Game() {
         fetchPokemon();
     }, []);
 
-    const correctGuess = () =>{
+    const correctGuess = () =>{ 
+        const nextStreak = scoreStreak + 1;
+        const pointsFarmed = 100 * nextStreak;
+        
         setFeedback("Correct");
         setAnswerColor("green");
         setRevealed(true);
-        setScore((previousScore) => previousScore + 100);
+        setScoreStreak(nextStreak);
+
+        setScore((previousScore) => previousScore + pointsFarmed);
+        
         setGuess("");
 
         setTimeout(() => {
@@ -102,6 +111,7 @@ export default function Game() {
         setFeedback("Incorrect");
         setAnswerColor("red");
         setGuessEvent(true);
+        setScoreStreak(1);
         setGuess("");
 
         setTimeout (() => {
