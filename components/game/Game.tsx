@@ -16,16 +16,26 @@ export default function Game() {
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
     const [score, setScore] = useState(0);
+    const [scoreStreak, setScoreStreak] = useState(1);
 
     const [guessesRemaining, setGuessesRemaining] = useState(3);
     const hearts = Array(guessesRemaining).fill("❤️")
   
     const [feedback, setFeedback] = useState("");
     const [revealed, setRevealed] = useState(false);
+    const [answerColor, setAnswerColor] = useState<"default" | "green" | "red">("default");
 
     const [gameOver, setGameOver] = useState(false);
 
     // Variables
+
+    const borderColors = {
+        default: "border-yellow-400",
+        green: "border-green-400",
+        red: "border-red-400",
+    };
+    
+    const borderColor = borderColors[answerColor];
 
     // Functions
     const resetGame = () => {
@@ -34,6 +44,7 @@ export default function Game() {
         setGuess("");
         setFeedback("");
         setRevealed(false);
+        setAnswerColor("default");
 
         setGuessesRemaining(3);
         setScore(0);
@@ -58,7 +69,7 @@ export default function Game() {
         setPokemon(data);
         }
         catch (error){
-
+            console.error(error);
         }
     }
 
@@ -68,6 +79,7 @@ export default function Game() {
 
     const correctGuess = () =>{
         setFeedback("Correct");
+        setAnswerColor("green");
         setRevealed(true);
         setScore((previousScore) => previousScore + 100);
         setGuess("");
@@ -88,6 +100,7 @@ export default function Game() {
         }
       
         setFeedback("Incorrect");
+        setAnswerColor("red");
         setGuessEvent(true);
         setGuess("");
 
@@ -120,18 +133,19 @@ export default function Game() {
     }
     // UI
     return (
-        <div className="
-            max-w-xl
-            mx-auto
-            mt-12
-            rounded-3xl
-            bg-white
-            shadow-2xl
-            border-4
-            border-yellow-400
-            p-8
-            transition-all
-            duration-300">
+        <div className={`
+        max-w-xl
+        mx-auto
+        mt-12
+        rounded-3xl
+        bg-white
+        shadow-2xl
+        border-4
+        p-8
+        transition-all
+        duration-300
+        ${borderColor}
+                    `}>
 
                 <div className="flex justify-between mb-6 text-xl font-extrabold p-2.5 rounded-lg">
                     <p>Score: {score}</p>
