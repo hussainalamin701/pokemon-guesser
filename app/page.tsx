@@ -4,9 +4,11 @@ import Footer from '@/components/layout/Footer';
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-gradient-to-br from-blue-200 via-sky-100 to-yellow-100'>
+    <div className='min-h-screen flex flex-col bg-gradient-to-br from-blue-200 via-sky-100 to-yellow-100'>
       <Header />
-      <Game />
+      <main className='flex-1'>
+        <Game />
+      </main>
       <Footer />
 
     </div>

@@ -89,8 +89,7 @@ export default function Game() {
         setRevealed(true);
         setScoreStreak(nextStreak);
 
-        setScore((previousScore) => previousScore + pointsFarmed);
-        
+        setScore((previousScore) => previousScore + pointsFarmed);  
         setGuess("");
 
         setTimeout(() => {
@@ -105,6 +104,7 @@ export default function Game() {
         setGuessesRemaining(newGuessesRemaining);
         
         if(newGuessesRemaining === 0){
+            setRevealed(true);
             setGameOver(true);
         }
       
