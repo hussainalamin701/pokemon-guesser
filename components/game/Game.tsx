@@ -36,6 +36,13 @@ export default function Game() {
         green: "border-green-400",
         red: "border-red-400",
     };
+
+    type playerStats = {
+        highScore: number;
+        gamesPlayed: number;
+        longestStreak: number;
+        pokemonGuessed: number;
+    }
     
     const borderColor = borderColors[answerColor];
 
