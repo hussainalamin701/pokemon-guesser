@@ -27,6 +27,8 @@ export default function Game() {
 
     const [gameOver, setGameOver] = useState(false);
 
+    const [playerStats, setPlayerStats] = useState();
+
     // Variables
 
     let currentStreak = 0;
@@ -85,6 +87,13 @@ export default function Game() {
 
     useEffect(() => {
         fetchPokemon();
+    }, []);
+
+    useEffect(() => {
+        const storedData = localStorage.getItem("playerStats");
+        if(storedData){
+            const objData = JSON.parse(storedData);
+        }
     }, []);
 
     const correctGuess = () =>{ 
