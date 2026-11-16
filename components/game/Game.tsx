@@ -213,20 +213,21 @@ export default function Game() {
                                 revealed = {revealed}/>
                 
                 {gameOver ? (
+                    <>
+                        <p>The Pokémon was {pokemon.name}!</p>
                         <GameOver
                             score={score}
                             restartGame={resetGame}
                         />
-                    ) : (
-                        <GuessInput
-                            guess={guess}
-                            setGuess={setGuess}
-                            handleGuess={handleGuess}
-                            guessEvent = {guessEvent}
-                        />
-                    )}
-
-                <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">{pokemon?.name.toLocaleUpperCase()}</p>
+                    </>
+                ) : (
+                    <GuessInput
+                        guess={guess}
+                        setGuess={setGuess}
+                        handleGuess={handleGuess}
+                        guessEvent={guessEvent}
+                    />
+                )}
                 <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">
                     {feedback}
                 </p>
