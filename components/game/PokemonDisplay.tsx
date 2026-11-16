@@ -8,7 +8,7 @@ type PokemonDisplayProps = {
 
 export default function PokemonDisplay({pokemon, revealed}: PokemonDisplayProps) {
     return (
-        <div className="flex flex-col items-center
+        <div className="flex flex-col
                         justify-center
                         items-center
                         bg-slate-100

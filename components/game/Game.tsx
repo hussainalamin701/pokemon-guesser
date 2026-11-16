@@ -14,6 +14,8 @@ export default function Game() {
     const [guessEvent, setGuessEvent] = useState(false);
 
     const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const [score, setScore] = useState(0);
     const [scoreStreak, setScoreStreak] = useState(1);
@@ -65,6 +67,9 @@ export default function Game() {
     }
 
     const fetchPokemon = async () => {
+        setIsLoading(true);
+        setError(null);
+
         try{
             setRevealed(false);
             const randomId = Math.floor(Math.random() * 251)+ 1;
@@ -72,6 +77,10 @@ export default function Game() {
             const response = await fetch(
                 `https://pokeapi.co/api/v2/pokemon/${randomId}`
         );
+
+        if(!response.ok){
+            throw new Error("Failed to fetch Pokémon data.");
+        }
 
         const data = await response.json();
 
@@ -82,6 +91,11 @@ export default function Game() {
         }
         catch (error){
             console.error(error);
+            setError("Failed to fetch Pokémon data.");
+        }
+
+        finally{
+            setIsLoading(false);
         }
     }
 
@@ -104,6 +118,7 @@ export default function Game() {
         setAnswerColor("green");
         setRevealed(true);
         setScoreStreak(nextStreak);
+        
 
         setScore((previousScore) => previousScore + pointsFarmed);  
         setGuess("");
@@ -122,6 +137,9 @@ export default function Game() {
         if(newGuessesRemaining === 0){
             setRevealed(true);
             setGameOver(true);
+
+            console.log("Game Over");
+            console.log("Last pokemon: ", pokemon?.name);
         }
       
         setFeedback("Incorrect");
@@ -154,9 +172,21 @@ export default function Game() {
     }
     
     // Loading
-    if(pokemon === null) {
+    if(isLoading && !pokemon){ 
         return <p>Loading... </p>
+    } 
+    if(error){
+        return( 
+            <div>
+                <p>Error: {error}</p>
+                <button onClick={fetchPokemon}>Try Again</button>
+            </div>
+        )
     }
+    if(!pokemon){
+        return <p>No Pokémon data available.</p>
+    }
+
     // UI
     return (
         <div className={`
@@ -196,7 +226,7 @@ export default function Game() {
                         />
                     )}
 
-
+                <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">{pokemon?.name.toLocaleUpperCase()}</p>
                 <p className="text-center mt-6 font-semibold text-black font-extrabold text-xl">
                     {feedback}
                 </p>
