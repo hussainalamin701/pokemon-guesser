@@ -3,7 +3,7 @@ An interactive Pokémon guessing game built with **Next.js**, **React**, **TypeS
 
 Guess the hidden Pokémon in three attempts by identifying its silhouette. Build your score by maintaining a streak and see how high you can get. The highest score goes on the podium of Pokemon Master!
 
-🔗 **Live Demo:** https://your-project.vercel.app
+🔗 **Live Demo:** https://silhouette-safari.vercel.app/
 
 ## Gameplay
 
