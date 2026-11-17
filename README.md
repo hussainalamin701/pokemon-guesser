@@ -1,90 +1,68 @@
-# 🎮 Pokédle
-An interactive Pokémon guessing game built with **Next.js**, **React**, **TypeScript**, and **Tailwind CSS**. 
+# 🎮 Silhouette Safari
 
-Guess the hidden Pokémon in three attempts by identifying its silhouette. Build your score by maintaining a streak and see how high you can get. The highest score goes on the podium of Pokemon Master!
+A Pokémon silhouette guessing game built with Next.js, React, TypeScript and Tailwind CSS.
 
-🔗 **Live Demo:** https://silhouette-safari.vercel.app/
+Identify each Pokémon, build your score and maintain your streak. You have three lives per game—each incorrect guess costs one life.
+
+🔗 **[Play Silhouette Safari](https://silhouette-safari.vercel.app/)**
 
 ## Gameplay
 
-![gameplay screenshot](public/gameplay.png)
+![Silhouette Safari gameplay](public/gameplay.png)
 
-### Tech Stack
+## Features
 
-- React
+- Random Pokémon fetched from PokéAPI.
+- Silhouette images revealed after a correct guess or game over.
+- Score tracking with a streak multiplier.
+- Three lives per game.
+- Answer reveal when the game ends.
+- Restart functionality.
+- API loading and error handling with a retry option.
+
+## Tech Stack
+
 - Next.js
+- React
 - TypeScript
 - Tailwind CSS
+- PokéAPI
+- Vercel
 
-### APIs
+## Run Locally
 
-- PokeAPI
+Requires Node.js and npm.
 
-### Development Tools
+1. Clone the repository:
 
-- Git
-- GitHub
-- Visual Studio Code
+   git clone https://github.com/hussainalamin701/pokemon-guesser.git
 
-## Features (WIP)
+2. Open the project folder:
 
-- [x] Integrated to PokeAPI
-- [x] Implemented Scorestreak
-- [] Persistent player statistics
-- [x] Context API
-- [] Authentication
-- [] Custom React Hooks
+   cd pokemon-guesser
 
-## 🛠️ Installation
+3. Install dependencies:
 
-Clone the repository
+   npm install
 
-```bash
-git clone https://github.com/hussainalamin701/pokemon-guesser.git
-```
+4. Start the development server:
 
-Move into the project
+   npm run dev
 
-```bash
-cd pokemon-guesser
-```
+Open http://localhost:3000 in your browser.
 
-Install dependencies
+## Production Build
 
-```bash
-npm install
-```
+Build the application:
 
-Start the development server
+    npm run build
 
-```bash
-npm run dev
-```
+Run the production build locally:
 
-Open
+    npm start
 
-```
-http://localhost:3000
-```
+## About
 
----
+Built as a personal project to practise React state management, TypeScript, API integration and deployment.
 
-## 🌐 API
-
-This project uses the free PokéAPI.
-
-https://pokeapi.co/
-
----
-
-## 👨‍💻 Author
-
-**Alamin Hussain**
-
-GitHub:
-https://github.com/hussainalamin701
-
-LinkedIn:
-https://www.linkedin.com/in/alamin-hussain-740783285/
-
----
+This is an unofficial fan project and is not affiliated with Nintendo, Game Freak or The Pokémon Company.
