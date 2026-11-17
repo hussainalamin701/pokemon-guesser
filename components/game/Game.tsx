@@ -88,6 +88,8 @@ export default function Game() {
         console.log(data.sprites.front_default);
 
         setPokemon(data);
+        setRevealed(false);
+
         }
         catch (error){
             console.error(error);
@@ -111,6 +113,10 @@ export default function Game() {
     }, []);
 
     const correctGuess = () =>{ 
+        if(revealed){
+            return;
+        }
+        
         const nextStreak = scoreStreak + 1;
         const pointsFarmed = 100 * nextStreak;
         
